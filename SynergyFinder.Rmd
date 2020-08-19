@@ -1,0 +1,86 @@
+---
+title: "Calculating Drug Synergy Combinations"
+author: "Kieran Redpath"
+date: "r Sys.Date()"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Instructions
+* Ensure all packages are correctly installed.
+* Substitute "SynergyFinderRTemplate.csv" Under "Load Packages and Data" with the name of a file in the same format, but with your data. This must be in the same folder as the file you're currently reading.
+* Check that the correct data type is entered under "Process Data". Default is "inhibition".
+* Check that the correct synergy calculation method is entered under "Calculate and Visualise Synergy Scores". Default is "Bliss".
+* Run code from a .Rmd document using "Ctrl + Enter" on the line or a highlighted block of text. Alternatively hit "Run All" under "Run" in the top right of RStudio, to run the whole document.
+
+### Required Packages
+```{r}
+# Run these lines if the relevant package is not installed (remove the "# first though")
+
+## dplyr
+# install.packages("dplyr")
+
+## openxlsx
+# install.packages("openxlsx", dependencies = TRUE)
+
+## synergyfinder
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("synergyfinder")
+```
+
+### Load Packages and Data
+```{r}
+# Load packages
+library(dplyr)
+library(openxlsx)
+library(synergyfinder)
+
+# Load combination data for any number of correctly indexed drug combinations (see the template file for what this should look like)
+# replace filename with a .csv file generated from the excel template
+SynFrame <- read.table(file = "SynergyFinderRTemplate.csv", header = TRUE, sep = ";")
+```
+
+### Process Data
+```{r}
+# Set the random seed so results are reproducible
+set.seed(42)
+
+# Process the synergy data (check that data.type is correct for your data, accepts "inhibition" or "viability")
+dose.response.mat <- ReshapeData(SynFrame,
+                                 data.type = "inhibition",
+                                 impute = TRUE,
+                                 noise = TRUE,
+                                 correction = "non")
+```
+
+### Plot Dose Response Curves
+```{r}
+# Plots curves within RStudio and the generated markdown document, but also saves a PDF in the current working directory
+PlotDoseResponse(dose.response.mat, save.file = TRUE)
+```
+
+### Calculate and Visualise Synergy Scores
+```{r}
+# Calculate synergy scores (method accepts "HSA", "Loewe", "Bliss", "ZIP")
+synergy.score <- CalculateSynergy(data = dose.response.mat,
+                                  method = "Bliss")
+
+# Visualise synergy scores, providing an average value and a visual indication of where synergy is high and low
+# Plots scores within RStudio and the generated markdown document, but also saves a PDF in the current working directory
+PlotSynergy(synergy.score, type = "all", save.file = TRUE)
+```
+
+### Find the Synergy Scores for Different Concentration Combinations
+```{r}
+# Isolate the synergy values for each concentration combination, and ensure that the column names are correct
+scores <- as.data.frame(synergy.score$scores)
+colnames(scores) <- colnames(scores) %>% gsub("X1.", "", .)
+
+# Save it as an excel table to the current working directory. Columns are drug_col, Rows are drug_row
+write.xlsx(scores, file = "SynergyScores.xlsx", asTable = TRUE, col.names = TRUE, row.names = TRUE)
+```
+
