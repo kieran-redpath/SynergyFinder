@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Required Packages
 ```{r}
-# Run these lines if the relevant package is not installed (remove the "# first though")
+# Run these lines if the relevant package is not installed (remove the "#" first though)
 
 ## dplyr
 # install.packages("dplyr")
@@ -41,7 +41,7 @@ library(synergyfinder)
 
 # Load combination data for any number of correctly indexed drug combinations (see the template file for what this should look like)
 # replace filename with a .csv file generated from the excel template
-SynFrame <- read.table(file = "SynergyFinderRTemplate.csv", header = TRUE, sep = ";")
+SynFrame <- read.table(file = "SynergyFinderRTemplate.csv", header = TRUE, sep = ";", fileEncoding = "UTF-8-BOM")
 ```
 
 ### Process Data
