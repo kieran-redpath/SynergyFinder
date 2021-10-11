@@ -42,6 +42,7 @@ library(synergyfinder)
 # Load combination data for any number of correctly indexed drug combinations (see the template file for what this should look like)
 # replace filename with a .csv file generated from the excel template
 SynFrame <- read.table(file = "SynergyFinderRTemplate.csv", header = TRUE, sep = ";", fileEncoding = "UTF-8-BOM")
+SynFrame <- na.omit(SynFrame)
 ```
 
 ### Process Data
@@ -51,7 +52,7 @@ set.seed(42)
 
 # Process the synergy data (check that data.type is correct for your data, accepts "inhibition" or "viability")
 dose.response.mat <- ReshapeData(SynFrame,
-                                 data.type = "inhibition",
+                                 data.type = "viability",
                                  impute = TRUE,
                                  noise = TRUE,
                                  correction = "non")
@@ -67,7 +68,7 @@ PlotDoseResponse(dose.response.mat, save.file = TRUE)
 ```{r}
 # Calculate synergy scores (method accepts "HSA", "Loewe", "Bliss", "ZIP")
 synergy.score <- CalculateSynergy(data = dose.response.mat,
-                                  method = "Bliss")
+                                  method = "Loewe")
 
 # Visualise synergy scores, providing an average value and a visual indication of where synergy is high and low
 # Plots scores within RStudio and the generated markdown document, but also saves a PDF in the current working directory
