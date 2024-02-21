@@ -1,0 +1,28 @@
+{
+    "id": "CED4F314",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1708475927049.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "id": "f022d49b0491484d8a2d3527097566be",
+        "name": "synergy.response.data",
+        "title": "synergy.response.data",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 8462954688902930467,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1708475927049,
+    "read_only": false,
+    "read_only_alternatives": []
+}
