@@ -168,7 +168,7 @@ for(x in unique(tmp$block_id)){
   
   # Rename rows for readability and plotting
   combo.names <- paste0(drug1, "_",
-                        synergy.response.data[[x]]$conc1, dose.response.mat[["drug_pairs"]][["conc_unit2"]][x],
+                        synergy.response.data[[x]]$conc1, dose.response.mat[["drug_pairs"]][["conc_unit1"]][x],
                         "_X_", drug2, "_",
                         synergy.response.data[[x]]$conc2, dose.response.mat[["drug_pairs"]][["conc_unit2"]][x])
   rownames(synergy.response.data[[x]]) <- combo.names
