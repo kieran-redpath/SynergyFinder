@@ -1,5 +1,0 @@
-"0","for(y in 1:length(synergy.response.data)){"
-"0","  write.xlsx(synergy.response.data[[y]], file = paste0(names(synergy.response.data[y]), "".xlsx""), rowNames = T)"
-"0","}"
-"0","# Clean up environment"
-"0","rm(""y"")"

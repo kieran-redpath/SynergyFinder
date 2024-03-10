@@ -1,6 +1,0 @@
-"0","# Load packages"
-"0","library(dplyr)"
-"0","library(ggplot2)"
-"0","library(gridExtra)"
-"0","library(openxlsx)"
-"0","library(synergyfinder)"

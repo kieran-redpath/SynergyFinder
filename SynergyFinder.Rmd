@@ -21,8 +21,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, include = F, echo = F}
 ## Run these lines if the relevant package is not installed (remove the "#" first though)
 
-## dplyr
-# install.packages("dplyr")
+## tidyverse, including dplyr and ggplot2
+# install.packages("tidyverse")
+
+## gridExtra
+# install.packages("gridExtra")
 
 ## openxlsx
 # install.packages("openxlsx", dependencies = TRUE)
