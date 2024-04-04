@@ -95,7 +95,7 @@ synergy.score <- CalculateSynergy(data = dose.response.mat,
 
 # Visualise synergy scores, providing an average value and a visual indication of where synergy is high and low
 # Plots scores within RStudio and the generated markdown document, but also saves a png in the current working directory
-PlotSynergy(synergy.score, type = "2D", method = "Loewe", block_ids = dose.response.mat[["drug_pairs"]][["block_id"]], summary_statistic = NULL, save_file = TRUE, file_type = "png")
+PlotSynergy(synergy.score, type = "2D", method = synergy.type, block_ids = dose.response.mat[["drug_pairs"]][["block_id"]], summary_statistic = NULL, save_file = TRUE, file_type = "png")
 ```
 
 ### Extract data
